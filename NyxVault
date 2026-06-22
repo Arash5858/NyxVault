@@ -1,0 +1,41 @@
+# NyxVault
+
+NyxVault is a lightweight, cross-platform file protection utility designed for developers and privacy-conscious users. It allows users to securely encrypt, organize, and manage sensitive files directly from the command line.
+
+## Features
+
+* AES-256 file encryption and decryption
+* Password-protected vaults
+* Secure file deletion
+* Directory synchronization
+* Automatic backup creation
+* Cross-platform support (Windows, Linux, macOS)
+* Simple and intuitive CLI interface
+
+## Technologies
+
+* Python 3.12
+* Cryptography Library
+* SQLite for metadata management
+* Typer for CLI commands
+
+## Installation
+
+```bash
+git clone https://github.com/yourusername/NyxVault.git
+cd NyxVault
+pip install -r requirements.txt
+```
+
+## Usage
+
+```bash
+nyxvault create myvault
+nyxvault add secret.pdf
+nyxvault lock
+nyxvault unlock
+```
+
+## Vision
+
+NyxVault aims to provide an elegant and developer-friendly approach to personal file security without relying on cloud services or complex graphical interfaces.
