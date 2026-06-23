@@ -12,13 +12,6 @@ NyxVault is a lightweight, cross-platform file protection utility designed for d
 * Cross-platform support (Windows, Linux, macOS)
 * Simple and intuitive CLI interface
 
-## Technologies
-
-* Python 3.12
-* Cryptography Library
-* SQLite for metadata management
-* Typer for CLI commands
-
 ## Installation
 
 ```bash
@@ -26,6 +19,12 @@ git clone https://github.com/yourusername/NyxVault.git
 cd NyxVault
 pip install -r requirements.txt
 ```
+## Technologies
+
+* Python 3.12
+* Cryptography Library
+* SQLite for metadata management
+* Typer for CLI commands 
 
 ## Usage
 
