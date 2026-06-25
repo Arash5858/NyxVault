@@ -15,6 +15,14 @@ NyxVault is a lightweight, cross-platform file protection utility designed for d
 ## Installation
 
 ```bash
+nyxvault create myvault
+nyxvault add secret.pdf
+nyxvault lock
+nyxvault unlock
+```
+
+## Vision
+```bash
 git clone https://github.com/yourusername/NyxVault.git
 cd NyxVault
 pip install -r requirements.txt
@@ -28,13 +36,5 @@ pip install -r requirements.txt
 
 ## Usage
 
-```bash
-nyxvault create myvault
-nyxvault add secret.pdf
-nyxvault lock
-nyxvault unlock
-```
-
-## Vision
 
 NyxVault aims to provide an elegant and developer-friendly approach to personal file security without relying on cloud services or complex graphical interfaces.
