@@ -1,45 +1,68 @@
-# NyxVault
+import os
+import shutil
+import json
+from datetime import datetime
 
-NyxVault is a lightweight, cross-platform file protection utility designed for developers and privacy-conscious users. It allows users to securely encrypt, organize, and manage sensitive files directly from the command line.
+LOG_FILE = "echoforge_log.json"
 
-## Features
-* Python 3.12
-* Cryptography Library
-* SQLite for metadata management
-* Typer for CLI commands 
+def organize(directory):
+    history = []
 
+    for filename in os.listdir(directory):
+        path = os.path.join(directory, filename)
 
-* AES-256 file encryption and decryption
-* Password-protected vaults
-* Secure file deletion
-* Directory synchronization
-* Automatic backup creation
-* Cross-platform support (Windows, Linux, macOS)
-* Simple and intuitive CLI interface
+        if os.path.isfile(path):
+            ext = os.path.splitext(filename)[1][1:].lower()
 
-## Installation
+            if not ext:
+                ext = "others"
 
-```bash
-nyxvault create myvault
-nyxvault add secret.pdf
-nyxvault lock
-nyxvault unlock
-```
+            target = os.path.join(directory, ext)
 
-## Vision
-```bash
-git clone https://github.com/yourusername/NyxVault.git
-cd NyxVault
-pip install -r requirements.txt
-```
-## Technologies
+            os.makedirs(target, exist_ok=True)
 
-* Python 3.12
-* Cryptography Library
-* SQLite for metadata management
-* Typer for CLI commands 
+            new_path = os.path.join(target, filename)
+            shutil.move(path, new_path)
 
-## Usage
+            history.append({
+                "from": path,
+                "to": new_path,
+                "time": datetime.now().isoformat()
+            })
 
+            print(f"Moved: {filename} -> {ext}/")
 
-NyxVault aims to provide an elegant and developer-friendly approach to personal file security without relying on cloud services or complex graphical interfaces.
+    with open(LOG_FILE, "w") as f:
+        json.dump(history, f, indent=4)
+
+    print("\nOrganization complete!")
+
+def undo():
+    if not os.path.exists(LOG_FILE):
+        print("No history found.")
+        return
+
+    with open(LOG_FILE, "r") as f:
+        history = json.load(f)
+
+    for item in reversed(history):
+        if os.path.exists(item["to"]):
+            shutil.move(item["to"], item["from"])
+
+    os.remove(LOG_FILE)
+    print("Undo completed!")
+
+if __name__ == "__main__":
+    print("EchoForge")
+    print("1. Organize")
+    print("2. Undo")
+
+    choice = input("Select: ")
+
+    if choice == "1":
+        folder = input("Directory: ")
+        organize(folder)
+    elif choice == "2":
+        undo()
+    else:
+        print("Invalid choice.")
