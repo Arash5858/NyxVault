@@ -5,6 +5,11 @@ from datetime import datetime
 
 LOG_FILE = "echoforge_log.json"
 
+            target = os.path.join(directory, ext)
+
+            os.makedirs(target, exist_ok=True)
+
+            new_path = os.path.join(target, filename)
 def organize(directory):
     history = []
 
@@ -17,11 +22,6 @@ def organize(directory):
             if not ext:
                 ext = "others"
 
-            target = os.path.join(directory, ext)
-
-            os.makedirs(target, exist_ok=True)
-
-            new_path = os.path.join(target, filename)
             shutil.move(path, new_path)
 
             history.append({
